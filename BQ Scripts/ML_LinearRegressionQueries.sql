@@ -31,3 +31,5 @@ STRUCT(10 AS top_k_features));
 
 #GLobal Explain
 SELECT * from ML.GLOBAL_Explain (MODEL `gcp-project-375309.ml.housing_prices_glbl`)
+
+
