@@ -1,0 +1,34 @@
+DNN Classifier / Regressor Create Model Options
+
+{CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
+model_name
+[OPTIONS(
+    MODEL_TYPE = { 'DNN_CLASSIFIER' | 'DNN_REGRESSOR' |
+                   'DNN_LINEAR_COMBINATION_CLASSIFIER' |
+                   'DNN_LINEAR_COMBINATION_REGRESSOR' },
+    INPUT_LABEL_COLS = string_array,
+    HIDDEN_UNITS = int64_array | HPARAM_CANDIDATES(...),
+    ACTIVATION_FN = { 'RELU' | 'RELU6' | 'CRELU' | 'ELU' | 'LEAKY_RELU' | 'SIGMOID' | 'TANH' },
+    DROPOUT = float64_value | HPARAM_RANGE(min, max),   -- fraction of neurons 'dropped out' during training
+    BATCH_SIZE = int64_value,                           -- # of rows fed at one time for model to update weights
+    OPTIMIZER = { 'ADAGRAD' | 'ADAM' | 'FTRL' | 'RMSPROP' | 'SGD' },
+    LEARN_RATE = float64_value,             
+    LEARN_RATE_STRATEGY = { 'CONSTANT' | 'LINE_SEARCH' },
+    L1_REG = float64_value,
+    L2_REG = float64_value,
+    MAX_ITERATIONS = int64_value,       -- max training steps a model will run
+    MIN_REL_PROGRESS = float64_value,   -- minimum relative loss improvement required between consecutive training steps
+    EARLY_STOP = { TRUE | FALSE },
+    WARM_START = { TRUE | FALSE },
+    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' },
+    DATA_SPLIT_EVAL_FRACTION = float64_value,
+    DATA_SPLIT_COL = string_value,
+    AUTO_CLASS_WEIGHTS = { TRUE | FALSE },        -- classifier only
+    CLASS_WEIGHTS = struct_array,                 -- classifier only
+    ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE },     -- classifier only
+    NUM_TRIALS = int64_value,                     -- hyperparameter tuning
+    MAX_PARALLEL_TRIALS = int64_value,            -- hyperparameter tuning
+    HPARAM_TUNING_OBJECTIVES = string_array,      -- hyperparameter tuning
+    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM' | 'GRID' }
+)]
+AS query_statement

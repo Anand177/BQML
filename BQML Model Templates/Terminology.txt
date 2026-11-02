@@ -1,0 +1,8 @@
+Learning Rate
+Learning rate controls the size of the step taken toward the minimum of a loss function during each iteration of training
+
+During training, a model calculates the gradient (slope) of the loss function to know which direction to adjust its internal weights. The learning rate scales that gradient:
+\(\text{New\ Weight}=\text{Old\ Weight}-(\text{Learning\ Rate}\times \text{Gradient})\)
+• Too High: The steps are too large. The model can overshoot the optimal minimum, bounce around, or diverge entirely.
+• Too Low: The steps are tiny. Training takes a very long time, consumes excessive resources, or risks getting stuck in a suboptimal local minimum.
+• Just Right: Balances convergence speed and precision, allowing the model to smoothly settle into a low-loss solution.
