@@ -1,0 +1,15 @@
+PCA Create Model Options
+
+{CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
+model_name
+[OPTIONS(
+    MODEL_TYPE = 'PCA',
+    NUM_PRINCIPAL_COMPONENTS = int64_value,       -- number of components to keep
+    PCA_EXPLAINED_VARIANCE_RATIO = float64_value, -- alternative to NUM_PRINCIPAL_COMPONENTS (0 to 1)
+    SCALE_FEATURES = { TRUE | FALSE },            -- standardize features before PCA
+    MIN_REL_PROGRESS = float64_value,
+    MAX_ITERATIONS = int64_value,
+    CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'DUMMY_ENCODING' },
+    PCA_SOLVER = { 'FULL' | 'RANDOMIZED' | 'AUTO'}
+)]
+AS query_statement
