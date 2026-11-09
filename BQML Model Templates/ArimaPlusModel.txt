@@ -1,0 +1,36 @@
+{CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
+model_name
+OPTIONS(
+  MODEL_TYPE = 'ARIMA_PLUS',
+
+  -- Time series columns
+  TIME_SERIES_TIMESTAMP_COL = 'string_value',         -- timestamp column
+  TIME_SERIES_DATA_COL = 'string_value',              -- value column to forecast
+  TIME_SERIES_ID_COL = {'string_value' | ['string_value', ...]},  -- series identifier(s) for multiple series
+
+  -- Forecasting horizon and model selection
+  HORIZON = int64_value,                              -- number of future points to forecast (default 1000)
+  AUTO_ARIMA = {TRUE | FALSE},                        -- automatically select best ARIMA order (default TRUE)
+  AUTO_ARIMA_MAX_ORDER = int64_value,                 -- max order for auto ARIMA search (1 to 5)
+  AUTO_ARIMA_MIN_ORDER = int64_value,                 -- min order for auto ARIMA search
+  NON_SEASONAL_ORDER = (int64_value, int64_value, int64_value),  -- (p, d, q) when AUTO_ARIMA = FALSE
+
+  -- Data frequency
+  DATA_FREQUENCY = {'AUTO_FREQUENCY' | 'PER_MINUTE' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'YEARLY'},
+
+  -- Trend, holidays and seasonality
+  INCLUDE_DRIFT = {TRUE | FALSE},                     -- include linear drift term
+  HOLIDAY_REGION = {'GLOBAL' | 'NA' | 'JAPAC' | 'EMEA' | 'LAC' | 'AE' | ...},  -- holiday calendar region
+  SEASONALITIES = ['WEEKLY' | 'MONTHLY' | 'YEARLY' | ...],  -- seasonal patterns to model explicitly
+  
+
+  -- Data cleaning and adjustments
+  CLEAN_SPIKES_AND_DIPS = {TRUE | FALSE},             -- detect and smooth spikes/dips (default TRUE)
+  ADJUST_STEP_CHANGES = {TRUE | FALSE},               -- detect and adjust level shifts (default TRUE)
+  DECOMPOSE_TIME_SERIES = {TRUE | FALSE},             -- return decomposition components (default TRUE)
+
+  -- Training options
+  DATA_CUTOFF = int64_value,                          -- hold out most recent N points from training (optional)
+  AUTO_ARIMA_CUTOFF... 
+)
+AS query_statement;

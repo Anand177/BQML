@@ -1,0 +1,24 @@
+SELECT * FROM ML.EVALUATE(MODEL `ml.weather_arima`);
+
+SELECT * FROM ML.ARIMA_EVALUATE(MODEL `ml.weather_arima`, STRUCT( FALSE AS SHOW_ALL_CANDIDATE_MODELS));
+SELECT * FROM ML.ARIMA_EVALUATE(MODEL `ml.weather_arima`, STRUCT( TRUE AS SHOW_ALL_CANDIDATE_MODELS));  
+
+SELECT * FROM ML.FORECAST(MODEL `ml.weather_arima`,  STRUCT(30 AS horizon, 0.75 AS confidence_level));
+
+SELECT * FROM ML.DETECT_ANOMALIES(MODEL `ml.weather_arima`, STRUCT(0.75 AS ANOMALY_PROB_THRESHOLD));
+
+SELECT * FROM ML.ARIMA_COEFFICIENTS(MODEL `ml.weather_arima`);
+
+
+SELECT * FROM ML.EVALUATE(MODEL `ml.weather_arima_complete`);
+
+SELECT * FROM ML.ARIMA_EVALUATE(MODEL `ml.weather_arima_complete`, STRUCT( FALSE AS SHOW_ALL_CANDIDATE_MODELS));
+SELECT * FROM ML.ARIMA_EVALUATE(MODEL `ml.weather_arima_complete`, STRUCT( TRUE AS SHOW_ALL_CANDIDATE_MODELS));  
+
+SELECT * FROM ML.FORECAST(MODEL `ml.weather_arima_complete`,  STRUCT(10 AS horizon, 0.75 AS confidence_level));
+
+SELECT * FROM ML.EXPLAIN_FORECAST(MODEL `ml.weather_arima_complete`,  STRUCT(10 AS horizon, 0.75 AS confidence_level));
+
+SELECT * FROM ML.DETECT_ANOMALIES(MODEL `ml.weather_arima_complete`, STRUCT(0.75 AS ANOMALY_PROB_THRESHOLD));
+
+SELECT * FROM ML.ARIMA_COEFFICIENTS(MODEL `ml.weather_arima_complete`);
