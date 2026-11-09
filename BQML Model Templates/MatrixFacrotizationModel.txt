@@ -1,0 +1,33 @@
+{CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
+model_name
+OPTIONS(
+  MODEL_TYPE = 'MATRIX_FACTORIZATION',
+
+  -- Feedback and core factorization settings
+  FEEDBACK_TYPE = {'EXPLICIT' | 'IMPLICIT'},   -- default: EXPLICIT
+  NUM_FACTORS = int64_value,                   -- number of latent factors
+  USER_COL = 'string_value',                   -- user ID column
+  ITEM_COL = 'string_value',                   -- item ID column
+  RATING_COL = 'string_value',                 -- rating/feedback column
+  WALS_ALPHA = float64_value,                  -- weight for implicit feedback (IMPLICIT only)
+  L2_REG = float64_value,                      -- L2 regularization strength
+
+  -- Training controls
+  MAX_ITERATIONS = int64_value,                -- max training iterations
+  EARLY_STOP = {TRUE | FALSE},                 -- stop when loss stops improving
+  MIN_REL_PROGRESS = float64_value,            -- minimum relative loss improvement to continue
+
+  -- Data split controls
+  DATA_SPLIT_METHOD = {'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT'},
+  DATA_SPLIT_EVAL_FRACTION = float64_value,    -- fraction of data used for evaluation (RANDOM/SEQ)
+  DATA_SPLIT_COL = 'string_value',             -- column used for CUSTOM or SEQ split
+
+  -- Hyperparameter tuning (optional)
+  NUM_TRIALS = int64_value,                    -- number of tuning trials
+  MAX_PARALLEL_TRIALS = int64_value,           -- trials to run concurrently
+  HPARAM_TUNING_OBJECTIVES = 'objective',      -- e.g. MEAN_SQUARED_ERROR, MEAN_ABSOLUTE_ERROR,
+                                               -- R2_SCORE, MEAN_AVERAGE_PRECISION,
+                                               -- NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN
+  HPARAM_TUNING_ALGORITHM = {'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH'}
+)
+AS query_statement;
